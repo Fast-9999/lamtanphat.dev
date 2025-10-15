@@ -1,0 +1,103 @@
+{{ define "main" }}
+<!-- Breadcrumb -->
+<section class="breadcrumb-section">
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="/" class="breadcrumb__link">Trang chủ</a>
+            <span class="breadcrumb__separator">/</span>
+            <a href="/tags/" class="breadcrumb__link">Tags</a>
+            <span class="breadcrumb__separator">/</span>
+            <span class="breadcrumb__current">{{ .Title }}</span>
+        </nav>
+    </div>
+</section>
+
+<!-- Tag Header -->
+<section class="tag-hero">
+    <div class="container">
+        <div class="tag-hero__content">
+            <div class="tag-hero__icon">
+                <i class="fas fa-tag"></i>
+            </div>
+            <h1 class="tag-hero__title">{{ .Title }}</h1>
+            <p class="tag-hero__description">
+                {{ if eq .Data.Singular "category" }}
+                    Khám phá {{ len .Pages }} bài viết trong chuyên mục {{ .Title }}
+                {{ else if eq .Data.Singular "tag" }}
+                    {{ len .Pages }} bài viết được gắn tag {{ .Title }}
+                {{ else }}
+                    {{ len .Pages }} bài viết trong {{ .Data.Singular }} {{ .Title }}
+                {{ end }}
+            </p>
+            <div class="tag-hero__meta">
+                <span class="tag-hero__count">
+                    <i class="fas fa-file-alt"></i>
+                    {{ len .Pages }} bài viết
+                </span>
+                <span class="tag-hero__type">
+                    <i class="fas fa-{{ if eq .Data.Singular "tag" }}tag{{ else }}folder{{ end }}"></i>
+                    {{ if eq .Data.Singular "tag" }}Tag{{ else }}Chuyên mục{{ end }}
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="term">
+    <div class="container">
+        
+        <div class="term__content">
+            {{ if .Pages }}
+            <div class="term__grid">
+                {{ range .Pages }}
+                <article class="term__card">
+                    <div class="term__image">
+                        <img src="{{ .Params.image | default "/images/default-post.jpg" }}" 
+                             alt="{{ .Title }}"
+                             loading="lazy"
+                             decoding="async"
+                             width="400"
+                             height="250">
+                        <div class="term__category">{{ .Params.category }}</div>
+                    </div>
+                    <div class="term__content">
+                        <h2 class="term__card-title">
+                            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                        </h2>
+                        <p class="term__excerpt">{{ .Summary | truncate 120 }}</p>
+                        {{ if .Params.tags }}
+                        <div class="term__tags">
+                            {{ range first 2 .Params.tags }}
+                            <span class="term__tag">{{ . }}</span>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                        <div class="term__meta">
+                            <span class="term__date">
+                                <i class="fas fa-calendar"></i>
+                                {{ .Date.Format "02/01/2006" }}
+                            </span>
+                            <span class="term__read-time">
+                                <i class="fas fa-clock"></i>
+                                {{ .ReadingTime }} phút đọc
+                            </span>
+                        </div>
+                        <div class="term__action">
+                            <a href="{{ .RelPermalink }}" class="term__read-more">
+                                <i class="fas fa-arrow-right"></i>
+                                Đọc thêm
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                {{ end }}
+            </div>
+            {{ else }}
+            <div class="term__empty">
+                <p>Chưa có bài viết nào trong {{ .Data.Singular }} này.</p>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}

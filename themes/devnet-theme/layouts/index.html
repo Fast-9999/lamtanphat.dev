@@ -1,0 +1,182 @@
+{{ define "main" }}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero__content">
+            <h1 class="hero__title">
+                Làm Chủ Lập Trình Mạng với Java & JavaScript
+            </h1>
+            <p class="hero__description">
+                Khám phá các khái niệm từ Sockets, API đến WebSockets qua các bài viết chi tiết và ví dụ thực tế.
+            </p>
+            <div class="hero__cta">
+                <a href="/posts/" class="btn btn--primary">
+                    <i class="fas fa-book-open"></i>
+                    Bắt đầu đọc
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Posts Section -->
+<section class="featured">
+    <div class="container">
+        <div class="section__header">
+            <h2 class="section__title">Bài Viết Nổi Bật</h2>
+            <p class="section__description">Dành cho người mới bắt đầu</p>
+        </div>
+        
+        <div class="featured__grid">
+            {{ range first 4 (where .Site.RegularPages "Params.featured" true) }}
+            <article class="featured__card">
+                <div class="featured__image">
+                    <img src="{{ .Params.image | default "/images/default-post.jpg" }}" 
+                         alt="{{ .Title }}"
+                         loading="lazy"
+                         decoding="async"
+                         width="400"
+                         height="250">
+                    <div class="featured__category">{{ .Params.category }}</div>
+                </div>
+                <div class="featured__content">
+                    <h3 class="featured__title">
+                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    </h3>
+                    <p class="featured__excerpt">{{ .Summary | truncate 120 }}</p>
+                    {{ if .Params.tags }}
+                    <div class="featured__tags">
+                        {{ range first 2 .Params.tags }}
+                        <span class="featured__tag">{{ . }}</span>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                    <div class="featured__meta">
+                        <span class="featured__date">
+                            <i class="fas fa-calendar"></i>
+                            {{ .Date.Format "02/01/2006" }}
+                        </span>
+                        <span class="featured__read-time">
+                            <i class="fas fa-clock"></i>
+                            {{ .ReadingTime }} phút đọc
+                        </span>
+                    </div>
+                    <div class="featured__action">
+                        <a href="{{ .RelPermalink }}" class="featured__read-more">
+                            <i class="fas fa-arrow-right"></i>
+                            Đọc thêm
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<!-- Recent Posts Section -->
+<section class="recent">
+    <div class="container">
+        <div class="section__header">
+            <h2 class="section__title">Bài Viết Mới Nhất</h2>
+            <a href="/posts/" class="section__link">Xem tất cả <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="recent__grid">
+            {{ range first 3 (where .Site.RegularPages "Section" "posts") }}
+            <article class="recent__card">
+                <div class="recent__image">
+                    <img src="{{ .Params.image | default "/images/default-post.jpg" }}" 
+                         alt="{{ .Title }}"
+                         loading="lazy"
+                         decoding="async"
+                         width="300"
+                         height="200">
+                    <div class="recent__category">{{ .Params.category }}</div>
+                </div>
+                <div class="recent__content">
+                    <h3 class="recent__title">
+                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    </h3>
+                    <p class="recent__excerpt">{{ .Summary | truncate 100 }}</p>
+                    {{ if .Params.tags }}
+                    <div class="recent__tags">
+                        {{ range first 2 .Params.tags }}
+                        <span class="recent__tag">{{ . }}</span>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                    <div class="recent__meta">
+                        <span class="recent__date">
+                            <i class="fas fa-calendar"></i>
+                            {{ .Date.Format "02/01/2006" }}
+                        </span>
+                        <span class="recent__read-time">
+                            <i class="fas fa-clock"></i>
+                            {{ .ReadingTime }} phút
+                        </span>
+                    </div>
+                    <div class="recent__action">
+                        <a href="{{ .RelPermalink }}" class="recent__read-more">
+                            <i class="fas fa-arrow-right"></i>
+                            Đọc thêm
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {{ end }}
+        </div>
+    </div>
+</section>
+
+<!-- Author Bio Section -->
+<section class="author">
+    <div class="container">
+        <div class="author__content">
+            <div class="author__image">
+                <img src="/images/phat.jpg" 
+                     alt="TaansFast"
+                     loading="lazy"
+                     decoding="async"
+                     width="200"
+                     height="200">
+            </div>
+            <div class="author__info">
+                <h2 class="author__name">Chào bạn, mình là TaansFast</h2>
+                <p class="author__description">
+                    Là một người đam mê tìm hiểu cách các ứng dụng giao tiếp với nhau, mình tạo ra blog này để chia sẻ hành trình khám phá lập trình mạng. Với kinh nghiệm thực tế trong việc phát triển các ứng dụng web và mobile, mình mong muốn giúp các bạn sinh viên và lập trình viên mới vào nghề có được nền tảng vững chắc về networking.
+                </p>
+                <a href="/about/" class="btn btn--outline">
+                    <i class="fas fa-user"></i>
+                    Tìm hiểu thêm về tôi
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter">
+    <div class="container">
+        <div class="newsletter__content">
+            <h2 class="newsletter__title">Đừng Bỏ Lỡ Bài Viết Hay!</h2>
+            <p class="newsletter__description">
+                Đăng ký để nhận các bài viết mới nhất và tips độc quyền về lập trình mạng thẳng vào email của bạn.
+            </p>
+            <form class="newsletter__form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="newsletter" />
+                <div style="display: none;">
+                    <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                </div>
+                <div class="newsletter__input-group">
+                    <input type="email" name="email" placeholder="Nhập email của bạn" required class="newsletter__input">
+                    <button type="submit" class="btn btn--primary newsletter__button">
+                        <i class="fas fa-paper-plane"></i>
+                        Đăng ký
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{{ end }}

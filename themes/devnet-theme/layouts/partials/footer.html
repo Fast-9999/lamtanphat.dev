@@ -1,0 +1,47 @@
+<footer class="footer">
+    <div class="container">
+        <div class="footer__content">
+            <div class="footer__section">
+                <h3 class="footer__title">DevNet Insights</h3>
+                <p class="footer__description">
+                    Chia sẻ kiến thức Lập trình Mạng với Java & JavaScript
+                </p>
+                <div class="footer__social">
+                    <a href="{{ .Site.Params.github }}" class="footer__social-link" target="_blank" rel="noopener">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="{{ .Site.Params.linkedin }}" class="footer__social-link" target="_blank" rel="noopener">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer__section">
+                <h4 class="footer__subtitle">Liên kết</h4>
+                <ul class="footer__links">
+                    <li><a href="/" class="footer__link">Trang chủ</a></li>
+                    <li><a href="/posts/" class="footer__link">Blog</a></li>
+                    <li><a href="/about/" class="footer__link">Giới thiệu</a></li>
+                    <li><a href="/contact/" class="footer__link">Liên hệ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer__section">
+                <h4 class="footer__subtitle">Chuyên mục</h4>
+                <ul class="footer__links">
+                    <li><a href="/categories/java-mastery-2025/" class="footer__link">Java Mastery</a></li>
+                    <li><a href="/categories/modern-javascript-2025/" class="footer__link">Modern JavaScript</a></li>
+                    <li><a href="/categories/thuc-chien-projects/" class="footer__link">Thực Chiến Projects</a></li>
+                    <li><a href="/categories/dev-insights-career-2025/" class="footer__link">Dev Insights & Career</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer__bottom">
+            <p class="footer__copyright">
+                © {{ now.Format "2006" }} {{ .Site.Title }} | Được xây dựng với Hugo | 
+                <a href="/privacy/" class="footer__link">Chính sách bảo mật</a>
+            </p>
+        </div>
+    </div>
+</footer>

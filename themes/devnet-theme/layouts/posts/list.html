@@ -1,0 +1,293 @@
+{{ define "main" }}
+<section class="blog-listing">
+    <div class="container">
+        <!-- Header Section -->
+        <header class="blog-listing__header">
+            <h1 class="blog-listing__title">{{ .Title | default "Tất Cả Bài Viết" }}</h1>
+            {{ if .Content }}
+            <div class="blog-listing__description">
+                {{ .Content }}
+            </div>
+            {{ else }}
+            <p class="blog-listing__description">Khám phá những bài viết mới nhất về lập trình, công nghệ và phát triển phần mềm</p>
+            {{ end }}
+        </header>
+
+        <!-- Main Content Layout -->
+        <div class="blog-listing__layout">
+            <!-- Sidebar -->
+            <aside class="blog-listing__sidebar">
+                <!-- Search Box -->
+                <div class="sidebar__widget">
+                    <h3 class="sidebar__title">Tìm kiếm</h3>
+                    <div class="sidebar__search">
+                        <input type="text" id="search-input" placeholder="Tìm kiếm bài viết..." class="sidebar__search-input">
+                        <button type="button" class="sidebar__search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Categories -->
+                <div class="sidebar__widget">
+                    <h3 class="sidebar__title">Chuyên mục</h3>
+                    <div class="sidebar__categories">
+                        <a href="/posts/" class="sidebar__category-link {{ if eq .RelPermalink "/posts/" }}active{{ end }}">
+                            <span class="sidebar__category-name">Tất cả</span>
+                            <span class="sidebar__category-count">{{ len .Pages }}</span>
+                        </a>
+                        {{ range .Site.Taxonomies.categories }}
+                        <a href="{{ .Page.RelPermalink }}" class="sidebar__category-link">
+                            <span class="sidebar__category-name">
+                                {{ if in .Page.RelPermalink "dev-insights-career-2025" }}Dev Insights & Career{{ end }}
+                                {{ if in .Page.RelPermalink "java-mastery-2025" }}Java Mastery{{ end }}
+                                {{ if in .Page.RelPermalink "modern-javascript-2025" }}Modern JavaScript{{ end }}
+                                {{ if in .Page.RelPermalink "thuc-chien-projects" }}Thực Chiến Projects{{ end }}
+                            </span>
+                            <span class="sidebar__category-count">{{ .Count }}</span>
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+
+                <!-- Recent Posts -->
+                <div class="sidebar__widget">
+                    <h3 class="sidebar__title">Bài viết gần đây</h3>
+                    <div class="sidebar__recent">
+                        {{ range first 5 .Site.RegularPages }}
+                        <div class="sidebar__recent-item">
+                            <div class="sidebar__recent-image">
+                                <img src="{{ .Params.image | default "/images/default-post.jpg" }}" alt="{{ .Title }}">
+                            </div>
+                            <div class="sidebar__recent-content">
+                                <h4 class="sidebar__recent-title">
+                                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                                </h4>
+                                <span class="sidebar__recent-date">{{ .Date.Format "02/01/2006" }}</span>
+                            </div>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+
+                <!-- Tag Cloud -->
+                <div class="sidebar__widget">
+                    <h3 class="sidebar__title">Tags phổ biến</h3>
+                    <div class="sidebar__tags">
+                        {{ range .Site.Taxonomies.tags }}
+                        <a href="{{ .Page.RelPermalink }}" class="sidebar__tag-link">
+                            {{ .Page.Title }} ({{ .Count }})
+                        </a>
+                        {{ end }}
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="blog-listing__main">
+                <!-- View Toggle -->
+                <div class="blog-listing__controls">
+                    <div class="blog-listing__view-toggle">
+                        <button type="button" class="view-toggle__btn active" data-view="grid">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button type="button" class="view-toggle__btn" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                    <div class="blog-listing__sort">
+                        <select id="sort-select" class="blog-listing__sort-select">
+                            <option value="date-desc">Mới nhất</option>
+                            <option value="date-asc">Cũ nhất</option>
+                            <option value="title-asc">A-Z</option>
+                            <option value="title-desc">Z-A</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Posts Grid/List -->
+                <div class="blog-listing__posts" id="posts-container">
+                    {{ range .Pages }}
+                    <article class="post-card" data-date="{{ .Date.Format "2006-01-02" }}" data-title="{{ .Title }}">
+                        <div class="post-card__image">
+                            <img src="{{ .Params.image | default "/images/default-post.jpg" }}" alt="{{ .Title }}">
+                            <div class="post-card__category">{{ .Params.category }}</div>
+                            <div class="post-card__overlay">
+                                <a href="{{ .RelPermalink }}" class="post-card__read-more">
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="post-card__content">
+                            <div class="post-card__meta">
+                                <span class="post-card__date">
+                                    <i class="fas fa-calendar"></i>
+                                    {{ .Date.Format "02/01/2006" }}
+                                </span>
+                                <span class="post-card__read-time">
+                                    <i class="fas fa-clock"></i>
+                                    {{ .ReadingTime }} phút đọc
+                                </span>
+                            </div>
+                            <h2 class="post-card__title">
+                                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                            </h2>
+                            <p class="post-card__excerpt">{{ .Summary | truncate 150 }}</p>
+                            {{ if .Params.tags }}
+                            <div class="post-card__tags">
+                                {{ range first 3 .Params.tags }}
+                                <span class="post-card__tag">{{ . }}</span>
+                                {{ end }}
+                            </div>
+                            {{ end }}
+                        </div>
+                    </article>
+                    {{ end }}
+                </div>
+
+                <!-- Pagination -->
+                {{ if gt (len .Pages) 0 }}
+                <div class="blog-listing__pagination">
+                    {{ if .Paginator }}
+                        {{ if gt .Paginator.TotalPages 1 }}
+                        <nav class="pagination">
+                            <div class="pagination__info">
+                                Hiển thị {{ .Paginator.PageNumber }} / {{ .Paginator.TotalPages }} trang
+                                ({{ .Paginator.TotalNumberOfElements }} bài viết)
+                            </div>
+                            
+                            <div class="pagination__controls">
+                                {{ if .Paginator.HasPrev }}
+                                <a href="{{ .Paginator.Prev.URL }}" class="pagination__btn pagination__btn--prev">
+                                    <i class="fas fa-chevron-left"></i>
+                                    Trước
+                                </a>
+                                {{ end }}
+                                
+                                <div class="pagination__numbers">
+                                    {{ $currentPage := .Paginator.PageNumber }}
+                                    {{ $totalPages := .Paginator.TotalPages }}
+                                    
+                                    {{ if gt $currentPage 3 }}
+                                    <a href="{{ .Paginator.First.URL }}" class="pagination__number">1</a>
+                                    {{ if gt $currentPage 4 }}
+                                    <span class="pagination__dots">...</span>
+                                    {{ end }}
+                                    {{ end }}
+                                    
+                                    {{ $startPage := sub $currentPage 2 }}
+                                    {{ if lt $startPage 1 }}
+                                        {{ $startPage = 1 }}
+                                    {{ end }}
+                                    {{ $endPage := add $currentPage 2 }}
+                                    {{ if gt $endPage $totalPages }}
+                                        {{ $endPage = $totalPages }}
+                                    {{ end }}
+                                    
+                                    {{ range $i := (seq $startPage $endPage) }}
+                                    <a href="{{ $.Paginator.URL | absURL }}page/{{ $i }}/" 
+                                       class="pagination__number {{ if eq $i $currentPage }}pagination__number--active{{ end }}">
+                                        {{ $i }}
+                                    </a>
+                                    {{ end }}
+                                    
+                                    {{ if lt $currentPage (sub $totalPages 2) }}
+                                    {{ if lt $currentPage (sub $totalPages 3) }}
+                                    <span class="pagination__dots">...</span>
+                                    {{ end }}
+                                    <a href="{{ .Paginator.Last.URL }}" class="pagination__number">{{ $totalPages }}</a>
+                                    {{ end }}
+                                </div>
+                                
+                                {{ if .Paginator.HasNext }}
+                                <a href="{{ .Paginator.Next.URL }}" class="pagination__btn pagination__btn--next">
+                                    Sau
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                                {{ end }}
+                            </div>
+                        </nav>
+                        {{ end }}
+                    {{ end }}
+                </div>
+                {{ else }}
+                <div class="blog-listing__empty">
+                    <div class="empty-state">
+                        <i class="fas fa-file-alt empty-state__icon"></i>
+                        <h3 class="empty-state__title">Chưa có bài viết nào</h3>
+                        <p class="empty-state__description">Chúng tôi đang chuẩn bị những nội dung hấp dẫn cho bạn.</p>
+                    </div>
+                </div>
+                {{ end }}
+            </main>
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript for Blog Listing -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // View Toggle
+    const viewToggleBtns = document.querySelectorAll('.view-toggle__btn');
+    const postsContainer = document.getElementById('posts-container');
+    
+    viewToggleBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const view = this.dataset.view;
+            
+            // Update active button
+            viewToggleBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Update container class
+            postsContainer.className = `blog-listing__posts blog-listing__posts--${view}`;
+        });
+    });
+
+    // Search functionality
+    const searchInput = document.getElementById('search-input');
+    const postCards = document.querySelectorAll('.post-card');
+    
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        
+        postCards.forEach(card => {
+            const title = card.querySelector('.post-card__title a').textContent.toLowerCase();
+            const excerpt = card.querySelector('.post-card__excerpt').textContent.toLowerCase();
+            
+            if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+
+    // Sort functionality
+    const sortSelect = document.getElementById('sort-select');
+    
+    sortSelect.addEventListener('change', function() {
+        const sortValue = this.value;
+        const posts = Array.from(postCards);
+        
+        posts.sort((a, b) => {
+            switch(sortValue) {
+                case 'date-desc':
+                    return new Date(b.dataset.date) - new Date(a.dataset.date);
+                case 'date-asc':
+                    return new Date(a.dataset.date) - new Date(b.dataset.date);
+                case 'title-asc':
+                    return a.dataset.title.localeCompare(b.dataset.title);
+                case 'title-desc':
+                    return b.dataset.title.localeCompare(a.dataset.title);
+                default:
+                    return 0;
+            }
+        });
+        
+        // Reorder posts in container
+        posts.forEach(post => postsContainer.appendChild(post));
+    });
+});
+</script>
+{{ end }}

@@ -1,0 +1,113 @@
+{{ define "main" }}
+<!-- Breadcrumb -->
+<section class="breadcrumb-section">
+    <div class="container">
+        <nav class="breadcrumb">
+            <a href="/" class="breadcrumb__link">Trang chủ</a>
+            <span class="breadcrumb__separator">/</span>
+            <a href="/{{ .Data.Plural }}/" class="breadcrumb__link">{{ if eq .Data.Singular "tag" }}Tags{{ else }}Chuyên mục{{ end }}</a>
+            <span class="breadcrumb__separator">/</span>
+            <span class="breadcrumb__current">{{ .Title }}</span>
+        </nav>
+    </div>
+</section>
+
+<!-- Taxonomy Header -->
+<section class="taxonomy-hero">
+    <div class="container">
+        <div class="taxonomy-hero__content">
+            <div class="taxonomy-hero__icon">
+                <i class="fas fa-{{ if eq .Data.Singular "tag" }}tag{{ else }}folder{{ end }}"></i>
+            </div>
+            <h1 class="taxonomy-hero__title">{{ .Title }}</h1>
+            <p class="taxonomy-hero__description">
+                {{ if eq .Data.Singular "category" }}
+                    Khám phá {{ len .Pages }} bài viết trong chuyên mục {{ .Title }}
+                {{ else if eq .Data.Singular "tag" }}
+                    {{ len .Pages }} bài viết được gắn tag {{ .Title }}
+                {{ else }}
+                    {{ len .Pages }} bài viết trong {{ .Data.Singular }} {{ .Title }}
+                {{ end }}
+            </p>
+            <div class="taxonomy-hero__meta">
+                <span class="taxonomy-hero__count">
+                    <i class="fas fa-file-alt"></i>
+                    {{ len .Pages }} bài viết
+                </span>
+                <span class="taxonomy-hero__type">
+                    <i class="fas fa-{{ if eq .Data.Singular "tag" }}tag{{ else }}folder{{ end }}"></i>
+                    {{ if eq .Data.Singular "tag" }}Tag{{ else }}Chuyên mục{{ end }}
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="taxonomy">
+    <div class="container">
+        
+        <div class="taxonomy__content">
+            {{ if .Pages }}
+            <div class="taxonomy__grid">
+                {{ range .Pages }}
+                <article class="taxonomy__card">
+                    <div class="taxonomy__image">
+                        <img src="{{ .Params.image | default "/images/default-post.jpg" }}" 
+                             alt="{{ .Title }}"
+                             loading="lazy"
+                             decoding="async"
+                             width="400"
+                             height="250">
+                        <div class="taxonomy__category">{{ .Params.category }}</div>
+                    </div>
+                    <div class="taxonomy__content">
+                        <h2 class="taxonomy__card-title">
+                            <a href="{{ .RelPermalink }}">
+                                {{ if hasPrefix .Title "Java-Mastery" }}Java Mastery{{ end }}
+                                {{ if hasPrefix .Title "Modern-Javascript" }}Modern JavaScript{{ end }}
+                                {{ if hasPrefix .Title "Thuc-Chien" }}Thực Chiến Projects{{ end }}
+                                {{ if hasPrefix .Title "Dev-Insights" }}Dev Insights & Career{{ end }}
+                                {{ if and (not (hasPrefix .Title "Java-Mastery")) (not (hasPrefix .Title "Modern-Javascript")) (not (hasPrefix .Title "Thuc-Chien")) (not (hasPrefix .Title "Dev-Insights")) }}{{ .Title }}{{ end }}
+                            </a>
+                        </h2>
+                        {{ if .Description }}
+                        <p class="taxonomy__excerpt">{{ .Description }}</p>
+                        {{ else if and .Summary (ne .Summary "") }}
+                        <p class="taxonomy__excerpt">{{ .Summary | truncate 120 }}</p>
+                        {{ end }}
+                        {{ if .Params.tags }}
+                        <div class="taxonomy__tags">
+                            {{ range first 2 .Params.tags }}
+                            <span class="taxonomy__tag">{{ . }}</span>
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                        <div class="taxonomy__meta">
+                            <span class="taxonomy__date">
+                                <i class="fas fa-calendar"></i>
+                                {{ .Date.Format "02/01/2006" }}
+                            </span>
+                            <span class="taxonomy__read-time">
+                                <i class="fas fa-clock"></i>
+                                {{ .ReadingTime }} phút đọc
+                            </span>
+                        </div>
+                        <div class="taxonomy__action">
+                            <a href="{{ .RelPermalink }}" class="taxonomy__read-more">
+                                <i class="fas fa-arrow-right"></i>
+                                Đọc thêm
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                {{ end }}
+            </div>
+            {{ else }}
+            <div class="taxonomy__empty">
+                <p>Chưa có bài viết nào trong {{ .Data.Singular }} này.</p>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}

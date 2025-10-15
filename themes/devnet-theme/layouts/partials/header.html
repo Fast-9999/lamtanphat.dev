@@ -1,0 +1,30 @@
+<header class="header">
+    <nav class="nav container">
+        <div class="nav__brand">
+            <a href="{{ .Site.BaseURL }}" class="nav__logo">
+                <i class="fas fa-network-wired"></i>
+                <span>{{ .Site.Title }}</span>
+            </a>
+        </div>
+        
+        <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list">
+                {{ range .Site.Menus.main }}
+                <li class="nav__item">
+                    <a href="{{ .URL }}" class="nav__link {{ if $.IsMenuCurrent "main" . }}active{{ end }}">
+                        {{ .Name }}
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+            
+            <div class="nav__close" id="nav-close">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        
+        <div class="nav__toggle" id="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+</header>

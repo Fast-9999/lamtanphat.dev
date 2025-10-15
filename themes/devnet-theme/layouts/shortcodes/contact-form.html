@@ -1,0 +1,120 @@
+<div class="contact-form">
+    <form class="contact-form__form" id="contact-form" name="contact" action="#" method="post" netlify netlify-honeypot="bot-field" novalidate>
+        <!-- Honeypot field for spam protection -->
+        <div style="display: none;">
+            <label>Don't fill this out if you're human: <input name="bot-field"></label>
+        </div>
+        
+        <!-- Form Status Messages -->
+        <div class="contact-form__status" id="form-status" style="display: none;">
+            <div class="contact-form__status-content">
+                <i class="fas fa-info-circle"></i>
+                <span id="status-message"></span>
+            </div>
+        </div>
+        
+        <div class="contact-form__group">
+            <label for="name" class="contact-form__label">Họ và tên *</label>
+            <div class="contact-form__input-wrapper">
+                <input type="text" id="name" name="name" required class="contact-form__input" 
+                       placeholder="Nhập họ và tên của bạn" autocomplete="name">
+                <div class="contact-form__error" id="name-error"></div>
+            </div>
+        </div>
+        
+        <div class="contact-form__group">
+            <label for="email" class="contact-form__label">Email *</label>
+            <div class="contact-form__input-wrapper">
+                <input type="email" id="email" name="email" required class="contact-form__input" 
+                       placeholder="your.email@example.com" autocomplete="email">
+                <div class="contact-form__error" id="email-error"></div>
+            </div>
+        </div>
+        
+        <div class="contact-form__group">
+            <label for="subject" class="contact-form__label">Chủ đề</label>
+            <div class="contact-form__input-wrapper">
+                <select id="subject" name="subject" class="contact-form__select">
+                    <option value="">Chọn chủ đề liên hệ</option>
+                    <option value="collaboration">🤝 Hợp tác dự án</option>
+                    <option value="question">❓ Câu hỏi về nội dung blog</option>
+                    <option value="feedback">💬 Phản hồi và góp ý</option>
+                    <option value="career">🎯 Tư vấn nghề nghiệp</option>
+                    <option value="technical">⚙️ Câu hỏi kỹ thuật</option>
+                    <option value="other">📝 Khác</option>
+                </select>
+                <div class="contact-form__error" id="subject-error"></div>
+            </div>
+        </div>
+        
+        <div class="contact-form__group">
+            <label for="message" class="contact-form__label">Tin nhắn *</label>
+            <div class="contact-form__input-wrapper">
+                <textarea id="message" name="message" rows="6" required class="contact-form__textarea" 
+                          placeholder="Hãy mô tả chi tiết câu hỏi hoặc vấn đề của bạn. Càng chi tiết, mình càng có thể hỗ trợ bạn tốt hơn..."></textarea>
+                <div class="contact-form__char-count">
+                    <span id="char-count">0</span>/1000 ký tự
+                </div>
+                <div class="contact-form__error" id="message-error"></div>
+            </div>
+        </div>
+        
+        <!-- Privacy Notice -->
+        <div class="contact-form__privacy">
+            <div class="contact-form__privacy-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="contact-form__privacy-content">
+                <p>
+                    <strong>Cam kết bảo mật:</strong> Thông tin của bạn sẽ được bảo mật tuyệt đối và chỉ được sử dụng để phản hồi liên hệ. 
+                    Mình không chia sẻ thông tin cá nhân với bên thứ ba.
+                </p>
+                <p class="contact-form__privacy-link">
+                    <a href="/privacy-policy/" target="_blank" rel="noopener">
+                        <i class="fas fa-external-link-alt"></i>
+                        Đọc chính sách bảo mật chi tiết
+                    </a>
+                </p>
+            </div>
+        </div>
+        
+        <!-- reCAPTCHA -->
+        <div class="contact-form__recaptcha">
+            <div class="g-recaptcha" data-sitekey="{{ .Site.Params.recaptcha_site_key }}" data-callback="onRecaptchaSuccess" data-size="invisible"></div>
+            <div class="contact-form__recaptcha-notice">
+                <i class="fas fa-robot"></i>
+                <span>Trang này được bảo vệ bởi reCAPTCHA và áp dụng 
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Chính sách Bảo mật</a> và 
+                <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Điều khoản Dịch vụ</a> của Google.</span>
+            </div>
+        </div>
+        
+        <div class="contact-form__group">
+            <button type="submit" class="btn btn--primary contact-form__submit" id="submit-btn">
+                <i class="fas fa-paper-plane"></i>
+                <span class="btn-text">Gửi tin nhắn</span>
+                <span class="btn-loading" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    Đang gửi...
+                </span>
+            </button>
+        </div>
+        
+        <!-- Success Message -->
+        <div class="contact-form__success" id="form-success" style="display: none;">
+            <div class="contact-form__success-content">
+                <div class="contact-form__success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="contact-form__success-text">
+                    <h4>Cảm ơn bạn đã liên hệ! 🎉</h4>
+                    <p>Tin nhắn của bạn đã được gửi thành công. Mình sẽ phản hồi trong vòng 2-3 ngày làm việc.</p>
+                    <p class="contact-form__success-note">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>Mẹo:</strong> Bạn có thể theo dõi blog hoặc kết nối trên GitHub/LinkedIn để nhận thông báo về các bài viết mới.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

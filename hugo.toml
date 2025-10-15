@@ -1,0 +1,87 @@
+baseURL = 'https://fast-9999.github.io/lamtanphat.dev/'
+languageCode = 'vi'
+title = 'DevNet Insights'
+theme = 'devnet-theme'
+
+[params]
+  description = "Chia sẻ kiến thức Lập trình Mạng với Java & JavaScript"
+  author = "TaansFast"
+  email = "contact@devnet-insights.com"
+  author_avatar = "/images/phat.jpg"
+  author_bio = "Lập trình viên đam mê chia sẻ kiến thức về Java, JavaScript và công nghệ web."
+  
+  # Social links
+  github = "https://github.com/taansfast"
+  linkedin = "https://linkedin.com/in/taansfast"
+  
+  # reCAPTCHA configuration
+  # Get your keys from: https://www.google.com/recaptcha/admin
+  recaptcha_site_key = "6Le3JOorAAAAAA3YtNJv7_1sXIEOGdqSw9OtsZa-"
+  
+  # Analytics (uncomment and add your tracking IDs)
+  # googleAnalytics = "G-XXXXXXXXXX"
+  # plausibleDomain = "devnet-insights.netlify.app"
+  
+  # Theme colors
+  primary_color = "#1e3a8a"  # Xanh đậm
+  secondary_color = "#64748b"  # Xám
+  accent_color = "#3b82f6"  # Xanh nhạt
+  
+  # Navigation
+  [[params.nav]]
+    name = "Trang chủ"
+    url = "/"
+  
+  [[params.nav]]
+    name = "Blog"
+    url = "/posts/"
+  
+  [[params.nav]]
+    name = "Giới thiệu"
+    url = "/about/"
+  
+  [[params.nav]]
+    name = "Liên hệ"
+    url = "/contact/"
+
+[menu]
+  [[menu.main]]
+    name = "Trang chủ"
+    url = "/"
+    weight = 1
+  
+  [[menu.main]]
+    name = "Blog"
+    url = "/posts/"
+    weight = 2
+  
+  [[menu.main]]
+    name = "Giới thiệu"
+    url = "/about/"
+    weight = 3
+  
+  [[menu.main]]
+    name = "Liên hệ"
+    url = "/contact/"
+    weight = 4
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[outputs]
+  home = ["html", "rss"]
+  page = ["html"]
+  section = ["html", "rss"]
+  taxonomy = ["html", "rss"]
+  term = ["html", "rss"]
+
+[pagination]
+  # Pagination settings for blog listing
+  # Number of posts per page
+  pageSize = 6
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

@@ -1,0 +1,349 @@
+{{ define "main" }}
+<div class="contact-page">
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="container">
+            <div class="contact-hero__content">
+                <h1 class="contact-hero__title">{{ .Title }}</h1>
+                <p class="contact-hero__description">{{ .Params.description }}</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Contact Content -->
+    <section class="contact-main">
+        <div class="container">
+            <div class="contact-layout">
+                <!-- Left Column - Main Content -->
+                <div class="contact-layout__left">
+                    <!-- Welcome Message -->
+                    <div class="contact-welcome">
+                        <h2 class="contact-welcome__title">Mình rất vui khi được kết nối với bạn đọc! 🚀</h2>
+                        <p class="contact-welcome__text">
+                            Dù bạn có một câu hỏi, một góp ý hay một cơ hội hợp tác, đừng ngần ngại liên hệ với mình nhé. 
+                            Mình luôn sẵn sàng lắng nghe và chia sẻ kinh nghiệm từ cộng đồng lập trình viên.
+                        </p>
+                    </div>
+
+                    <!-- Contact Reasons -->
+                    <div class="contact-reasons">
+                        <h3 class="contact-reasons__title">Bạn có thể liên hệ với mình để:</h3>
+                        <div class="contact-reasons__grid">
+                            <div class="contact-reason">
+                                <div class="contact-reason__icon">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                                <div class="contact-reason__content">
+                                    <h4>Thảo luận về cơ hội hợp tác dự án</h4>
+                                    <p>Freelance, consulting, hoặc các dự án thú vị</p>
+                                </div>
+                            </div>
+                            <div class="contact-reason">
+                                <div class="contact-reason__icon">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <div class="contact-reason__content">
+                                    <h4>Góp ý về nội dung bài viết</h4>
+                                    <p>Đề xuất chủ đề mới hoặc phản hồi về bài viết hiện tại</p>
+                                </div>
+                            </div>
+                            <div class="contact-reason">
+                                <div class="contact-reason__icon">
+                                    <i class="fas fa-question-circle"></i>
+                                </div>
+                                <div class="contact-reason__content">
+                                    <h4>Hỏi đáp nhanh về chủ đề cụ thể</h4>
+                                    <p>Java, JavaScript, hoặc các công nghệ web khác</p>
+                                </div>
+                            </div>
+                            <div class="contact-reason">
+                                <div class="contact-reason__icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="contact-reason__content">
+                                    <h4>Tư vấn định hướng nghề nghiệp</h4>
+                                    <p>Cho sinh viên CNTT và developers mới vào nghề</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Important Notice -->
+                    <div class="contact-notice">
+                        <div class="contact-notice__icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="contact-notice__content">
+                            <h4>Xin lưu ý quan trọng:</h4>
+                            <p>
+                                Mình không thể hỗ trợ gỡ lỗi (debug) các dự án cá nhân qua form này. 
+                                Bạn có thể đặt các câu hỏi kỹ thuật chung trong phần bình luận của các bài viết liên quan để cộng đồng cùng thảo luận.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Response Time -->
+                    <div class="contact-response-time">
+                        <div class="contact-response-time__icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-response-time__content">
+                            <h4>Thời gian phản hồi:</h4>
+                            <p>Mình sẽ cố gắng trả lời email của bạn trong vòng <strong>2-3 ngày làm việc</strong>.</p>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form-section">
+                        <h3 class="contact-form-section__title">Gửi tin nhắn cho mình</h3>
+                        {{ .Content }}
+                    </div>
+                </div>
+
+                <!-- Right Column - Contact Info & Social -->
+                <div class="contact-layout__right">
+                    <!-- Author Photo -->
+                    <div class="contact-author">
+                        <div class="contact-author__photo">
+                            <img src="{{ .Site.Params.author_avatar | default "/images/phat.jpg" }}" alt="{{ .Site.Params.author }}" class="contact-author__image">
+                        </div>
+                        <div class="contact-author__info">
+                            <h4 class="contact-author__name">{{ .Site.Params.author }}</h4>
+                            <p class="contact-author__role">{{ .Site.Params.author_bio | default "Lập trình viên & Technical Writer" }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Direct Contact Methods -->
+                    <div class="contact-methods">
+                        <h4 class="contact-methods__title">Liên hệ trực tiếp</h4>
+                        
+                        <!-- Email -->
+                        <div class="contact-method">
+                            <div class="contact-method__icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-method__content">
+                                <h5>Email chính thức</h5>
+                                <a href="mailto:{{ .Site.Params.email }}" class="contact-method__link">
+                                    {{ .Site.Params.email }}
+                                </a>
+                                <p class="contact-method__description">Cách liên hệ nhanh nhất và chuyên nghiệp nhất</p>
+                            </div>
+                        </div>
+
+                        <!-- Social Links -->
+                        <div class="contact-social">
+                            <h5 class="contact-social__title">Kết nối trên mạng xã hội</h5>
+                            <div class="contact-social__links">
+                                {{ if .Site.Params.github }}
+                                <a href="{{ .Site.Params.github }}" class="contact-social__link contact-social__link--github" target="_blank" rel="noopener">
+                                    <i class="fab fa-github"></i>
+                                    <span>GitHub</span>
+                                </a>
+                                {{ end }}
+                                {{ if .Site.Params.linkedin }}
+                                <a href="{{ .Site.Params.linkedin }}" class="contact-social__link contact-social__link--linkedin" target="_blank" rel="noopener">
+                                    <i class="fab fa-linkedin-in"></i>
+                                    <span>LinkedIn</span>
+                                </a>
+                                {{ end }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Section -->
+                    <div class="contact-faq">
+                        <h4 class="contact-faq__title">Câu hỏi thường gặp</h4>
+                        <div class="contact-faq__list">
+                            <div class="contact-faq__item">
+                                <h5 class="contact-faq__question">Bạn có nhận các dự án freelance không?</h5>
+                                <p class="contact-faq__answer">Có, mình sẵn sàng thảo luận về các dự án phù hợp với chuyên môn Java và JavaScript.</p>
+                            </div>
+                            <div class="contact-faq__item">
+                                <h5 class="contact-faq__question">Mình có thể sử dụng code của bạn không?</h5>
+                                <p class="contact-faq__answer">Tất cả code examples trên blog đều có thể sử dụng tự do. Chỉ cần ghi credit khi sử dụng.</p>
+                            </div>
+                            <div class="contact-faq__item">
+                                <h5 class="contact-faq__question">Bạn có tổ chức workshop không?</h5>
+                                <p class="contact-faq__answer">Thỉnh thoảng mình có tổ chức các buổi chia sẻ online. Theo dõi blog để cập nhật thông tin.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Google reCAPTCHA v3 -->
+<script src="https://www.google.com/recaptcha/api.js?render={{ .Site.Params.recaptcha_site_key }}"></script>
+
+<!-- Custom JavaScript for Contact Page -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // reCAPTCHA variables
+    let recaptchaToken = null;
+    let recaptchaVerified = false;
+    
+    // Initialize reCAPTCHA
+    grecaptcha.ready(function() {
+        grecaptcha.execute('{{ .Site.Params.recaptcha_site_key }}', {action: 'contact_form'}).then(function(token) {
+            recaptchaToken = token;
+        });
+    });
+    
+    // reCAPTCHA success callback
+    window.onRecaptchaSuccess = function(token) {
+        recaptchaVerified = true;
+        recaptchaToken = token;
+    };
+    
+    // Contact form handling
+    const contactForm = document.querySelector('.contact-form__form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+            
+            // Basic validation
+            if (!name || !email || !message) {
+                showNotification('Vui lòng điền đầy đủ thông tin bắt buộc.', 'error');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showNotification('Vui lòng nhập địa chỉ email hợp lệ.', 'error');
+                return;
+            }
+            
+            // Check reCAPTCHA
+            if (!recaptchaToken) {
+                showNotification('Đang xác thực bảo mật...', 'info');
+                return;
+            }
+            
+            // Prepare data for Netlify Forms
+            const netlifyData = new FormData();
+            netlifyData.append('form-name', 'contact');
+            netlifyData.append('name', name);
+            netlifyData.append('email', email);
+            netlifyData.append('subject', subject || 'Khác');
+            netlifyData.append('message', message);
+            netlifyData.append('recaptcha-token', recaptchaToken);
+            
+            // Submit to Netlify Forms
+            const submitBtn = this.querySelector('.contact-form__submit');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang gửi...';
+            submitBtn.disabled = true;
+            
+            fetch('/', {
+                method: 'POST',
+                body: netlifyData
+            })
+            .then(response => {
+                if (response.ok) {
+                    showNotification('Cảm ơn bạn đã liên hệ! Mình sẽ phản hồi sớm nhất có thể.', 'success');
+                    this.reset();
+                    // Reset reCAPTCHA
+                    recaptchaToken = null;
+                    grecaptcha.ready(function() {
+                        grecaptcha.execute('{{ .Site.Params.recaptcha_site_key }}', {action: 'contact_form'}).then(function(token) {
+                            recaptchaToken = token;
+                        });
+                    });
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ trực tiếp qua email.', 'error');
+            })
+            .finally(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+    }
+    
+    // Notification system
+    function showNotification(message, type = 'info') {
+        // Remove existing notifications
+        const existingNotifications = document.querySelectorAll('.contact-notification');
+        existingNotifications.forEach(notification => notification.remove());
+        
+        // Create notification
+        const notification = document.createElement('div');
+        notification.className = `contact-notification contact-notification--${type}`;
+        notification.innerHTML = `
+            <div class="contact-notification__content">
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+                <span>${message}</span>
+            </div>
+            <button class="contact-notification__close" onclick="this.parentElement.remove()">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+        
+        // Add to page
+        document.body.appendChild(notification);
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (notification.parentElement) {
+                notification.remove();
+            }
+        }, 5000);
+    }
+    
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Animate elements on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+            }
+        });
+    }, observerOptions);
+
+    // Observe contact reasons
+    const contactReasons = document.querySelectorAll('.contact-reason');
+    contactReasons.forEach(reason => {
+        observer.observe(reason);
+    });
+    
+    // Observe FAQ items
+    const faqItems = document.querySelectorAll('.contact-faq__item');
+    faqItems.forEach(item => {
+        observer.observe(item);
+    });
+});
+</script>
+{{ end }}
