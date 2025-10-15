@@ -47,22 +47,22 @@ theme = 'devnet-theme'
 [menu]
   [[menu.main]]
     name = "Trang chủ"
-    url = "/"
+    url = "https://fast-9999.github.io/lamtanphat.dev/"
     weight = 1
   
   [[menu.main]]
     name = "Blog"
-    url = "/posts/"
+    url = "https://fast-9999.github.io/lamtanphat.dev/posts/"
     weight = 2
   
   [[menu.main]]
     name = "Giới thiệu"
-    url = "/about/"
+    url = "https://fast-9999.github.io/lamtanphat.dev/about/"
     weight = 3
   
   [[menu.main]]
     name = "Liên hệ"
-    url = "/contact/"
+    url = "https://fast-9999.github.io/lamtanphat.dev/contact/"
     weight = 4
 
 [taxonomies]
